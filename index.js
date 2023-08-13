@@ -1,5 +1,6 @@
 // Import the nextISSTimesForMyLocation function from iss module.
 const { nextISSTimesForMyLocation } = require('./iss');
+const { printPassTimes } = require('./printPassTimes');
 
 // Invoke the nextISSTimesForMyLocation function to get ISS flyover times.
 nextISSTimesForMyLocation((error, passTimes) => {
@@ -8,13 +9,6 @@ nextISSTimesForMyLocation((error, passTimes) => {
     console.error("It did not work:", error);
     return;
   }
-
-  // Loop through each flyover time and print details.
-  for (const pass of passTimes) {
-    // Convert rise time from UNIX timestamp to readable data format.
-    const dateTime = new Date(0);
-    const duration = pass.duration;
-    dateTime.setUTCSeconds(pass.risetime);
-    console.log(`Next pass at ${dateTime} for ${duration} seconds!`);
-  }
+  // Import printPassTimes function and pass passTimes data.
+  printPassTimes(passTimes);
 });
